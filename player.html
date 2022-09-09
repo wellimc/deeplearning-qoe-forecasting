@@ -1,0 +1,58 @@
+
+ <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
+<script src="https://src.litix.io/core/4/mux.js"></script> 
+<video
+  id="myvideo"
+  controls
+  style="width: 100%; max-width: 500px;"
+/>
+
+<script>
+  const video = document.querySelector('#myvideo');
+  const src = 'https://stream.mux.com/96Pasv2prV38TIJeSwIPOHOP01uduHi007N4JN0101Of1s4.m3u8';
+  if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    // Some browsers (safari and ie edge) support HLS natively
+    video.src = src;
+  } else if (Hls.isSupported()) {
+    
+            let hls = new Hls();
+            hls.loadSource(src);
+            hls.attachMedia(video);
+
+            const videoEl = document.querySelector('#myvideo');
+            alert(3)
+
+             mux.monitor(videoEl, {
+              debug: false,
+              hlsjs: hls,
+              Hls: Hls,
+              data: {
+                env_key: 'erngr3nkjkt7svk02fhsfaaj9', // required
+                // Metadata fields
+                player_name: 'Main Player', // any arbitrary string you want to use to identify this player
+                player_init_time: window.muxPlayerInitTime, // ex: 1451606400000
+          
+                viewer_user_id: '4', // ex: '12345'
+                experiment_name: 'Cloud Samsumg Tablet', // ex: 'player_test_A'
+                sub_property_id: 'telaxxmemoria2', // ex: 'cus-1'
+
+                // Video Metadata
+                video_id: '1', // ex: 'abcd123'
+                video_title: '2', // ex: 'My Great Video'
+                video_series: '3', // ex: 'Weekly Great Videos'
+                video_duration: '4', // in milliseconds, ex: 120000
+                video_stream_type: '5', // 'live' or 'on-demand'
+                video_cdn: '6' // ex: 'Fastly', 'Akamai'
+
+              }}
+            );
+    
+  } else {
+    console.error("This is a legacy browser that doesn't support MSE");
+  }
+</script> 
+
+
+
+
+

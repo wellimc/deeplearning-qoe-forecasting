@@ -1,0 +1,89 @@
+<<!DOCTYPE html>
+<html>
+<script src="https://src.litix.io/core/4/mux.js"></script> 
+<script>
+  window.muxPlayerInitTime = Date.now();
+</script>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <style>
+    
+  </style>
+</head>
+
+<body>
+   <video
+        id="myvideo"
+        controls
+        width="960"
+        height="400"
+    />
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
+   
+   <script>
+
+   
+
+
+    window.muxPlayerInitTime = Date.now();
+
+
+    ( function () {
+
+         
+    
+          // we're using a Mux HLS URL in this example, but the Mux Data integration
+          // with HLS.js works wit h any HLS url
+          url = 'https://stream.mux.com/96Pasv2prV38TIJeSwIPOHOP01uduHi007N4JN0101Of1s4.m3u8';
+          var video  = document.getElementById('myvideo');
+          
+          if(video.canPlayType('application/vnd.apple.mpegURL')){
+            alert('option1')
+            video.source = url
+          }else if (Hls.isSupported()) {
+            alert('option2')
+            let hls = new Hls();
+            hls.loadSource(url);
+            hls.attachMedia(video);
+
+            const videoEl = document.querySelector('#myvideo');
+            alert(3)
+
+             mux.monitor(videoEl, {
+              debug: false,
+              hlsjs: hls,
+              Hls: Hls,
+              data: {
+                env_key: 'erngr3nkjkt7svk02fhsfaaj9', // required
+                // Metadata fields
+                player_name: 'Main Player', // any arbitrary string you want to use to identify this player
+                player_init_time: window.muxPlayerInitTime, // ex: 1451606400000
+          
+                viewer_user_id: '4', // ex: '12345'
+                experiment_name: 'Cloud Samsumg Tablet', // ex: 'player_test_A'
+                sub_property_id: 'telaxxmemoria2', // ex: 'cus-1'
+
+                // Video Metadata
+                video_id: '1', // ex: 'abcd123'
+                video_title: '2', // ex: 'My Great Video'
+                video_series: '3', // ex: 'Weekly Great Videos'
+                video_duration: '4', // in milliseconds, ex: 120000
+                video_stream_type: '5', // 'live' or 'on-demand'
+                video_cdn: '6' // ex: 'Fastly', 'Akamai'
+
+              }}
+            );
+          }
+               
+    })();
+
+
+
+        
+              
+</script>  
+</body>
+</html>
